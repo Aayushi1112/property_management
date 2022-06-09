@@ -2,6 +2,7 @@ package com.mycompany.propertymanagement.controller;
 
 import com.mycompany.propertymanagement.dto.CalculatorDTO;
 import com.mycompany.propertymanagement.dto.PropertyDTO;
+import com.mycompany.propertymanagement.exception.BusinesssClassException;
 import com.mycompany.propertymanagement.service.PropertyService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ public class PropertyControllerTest {
     //Mockito will give memory to PropertyService and it will inject this dummy/proxy PropertyService object inside the proxy object of PropertyController
     @Test
     @DisplayName("test sucess scenario for saving property")
-    void testSaveProperty() {
+    void testSaveProperty() throws BusinesssClassException {
         PropertyDTO propertyDTO = new PropertyDTO();
         propertyDTO.setTitle("Dummy Property");
         PropertyDTO savedProperty = new PropertyDTO();
@@ -38,6 +39,7 @@ public class PropertyControllerTest {
         Assertions.assertNotNull(responseEntity.getBody().getId());
         Assertions.assertEquals(HttpStatus.CREATED.value(),responseEntity.getStatusCodeValue());
     }
+
 
     @Test@DisplayName("test success scenario for fetching all the properties")
     void TestGetAllProperties()

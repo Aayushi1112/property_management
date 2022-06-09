@@ -5,6 +5,7 @@ import com.mycompany.propertymanagement.dto.PropertyDTO;
 import com.mycompany.propertymanagement.entity.PropertyEntity;
 import com.mycompany.propertymanagement.entity.UserEntity;
 import com.mycompany.propertymanagement.exception.BusinessException;
+import com.mycompany.propertymanagement.exception.BusinesssClassException;
 import com.mycompany.propertymanagement.exception.ErrorModel;
 import com.mycompany.propertymanagement.repository.PropertyRepository;
 import com.mycompany.propertymanagement.repository.UserRepository;
@@ -34,7 +35,7 @@ public class PropertyServiceImpl implements PropertyService {
     private UserRepository userRepository;
 
     @Override
-    public PropertyDTO saveProperty(PropertyDTO propertyDTO) {
+    public PropertyDTO saveProperty(PropertyDTO propertyDTO) throws BusinesssClassException {
 
         Optional<UserEntity> optUe = userRepository.findById(propertyDTO.getUserId());
         if(optUe.isPresent()) {
@@ -44,13 +45,13 @@ public class PropertyServiceImpl implements PropertyService {
 
             propertyDTO = propertyConverter.convertEntityToDTO(pe);
         }else{
-            List<ErrorModel> errorModelList = new ArrayList<>();
-            ErrorModel errorModel = new ErrorModel();
-            errorModel.setCode("USER_ID_NOT_EXIST");
-            errorModel.setMessage("User does not exist");
-            errorModelList.add(errorModel);
+//            List<ErrorModel> errorModelList = new ArrayList<>();
+//            ErrorModel errorModel = new ErrorModel();
+//            errorModel.setCode("USER_ID_NOT_EXIST");
+//            errorModel.setMessage("User does not exist");
+//            errorModelList.add(errorModel);
 
-            throw new BusinessException(errorModelList);
+            throw new BusinesssClassException("not found");
         }
         return propertyDTO;
     }
