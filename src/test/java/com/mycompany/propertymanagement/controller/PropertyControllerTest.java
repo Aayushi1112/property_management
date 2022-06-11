@@ -55,6 +55,7 @@ public class PropertyControllerTest {
         propertyController.getAllProperties();
         ResponseEntity<List<PropertyDTO>> responseEntity = propertyController.getAllProperties();
         Assertions.assertEquals(1,responseEntity.getBody().size());
+
         Assertions.assertEquals(HttpStatus.OK.value(),responseEntity.getStatusCodeValue());
 
     }
@@ -68,6 +69,8 @@ public class PropertyControllerTest {
           Assertions.assertEquals(23.89,responseEntity.getBody().getPrice());
           Assertions.assertEquals(HttpStatus.OK.value(),responseEntity.getStatusCodeValue());
     }
+
+
 
 
 }

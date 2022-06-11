@@ -1,6 +1,7 @@
 package com.mycompany.propertymanagement.controller;
 
 import com.mycompany.propertymanagement.dto.PropertyDTO;
+import com.mycompany.propertymanagement.exception.BusinesssClassException;
 import com.mycompany.propertymanagement.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class PropertyController {
     }
 
     @PostMapping("/properties")
-    public ResponseEntity<PropertyDTO> saveProperty(@RequestBody PropertyDTO propertyDTO){
+    public ResponseEntity<PropertyDTO> saveProperty(@RequestBody PropertyDTO propertyDTO) throws BusinesssClassException {
 
         propertyDTO = propertyService.saveProperty(propertyDTO);
 
@@ -63,7 +64,7 @@ public class PropertyController {
     }
 
     @PatchMapping("/properties/update-description/{propertyId}")
-    public ResponseEntity<PropertyDTO> updatePropertyDescription(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyId){
+    public ResponseEntity<PropertyDTO> updatePropertyDescription(@RequestBody PropertyDTO propertyDTO, @PathVariable Long propertyId) throws BusinesssClassException {
         propertyDTO = propertyService.updatePropertyDescription(propertyDTO, propertyId);
         ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.OK);
         return responseEntity;

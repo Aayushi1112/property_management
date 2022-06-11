@@ -12,7 +12,7 @@ public interface PropertyService {
     List<PropertyDTO> getAllProperties();
     List<PropertyDTO> getAllPropertiesForUser(Long userId);
     PropertyDTO updateProperty(PropertyDTO propertyDTO, Long propertyId);
-    PropertyDTO updatePropertyDescription(@RequestBody PropertyDTO propertyDTO, Long propertyId);
+    PropertyDTO updatePropertyDescription(@RequestBody PropertyDTO propertyDTO, Long propertyId) throws BusinesssClassException;
     PropertyDTO updatePropertyPrice(@RequestBody PropertyDTO propertyDTO, Long propertyId);
     void deleteProperty(Long propertyId);
 }

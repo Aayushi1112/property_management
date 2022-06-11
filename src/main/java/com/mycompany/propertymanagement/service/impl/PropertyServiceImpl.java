@@ -51,7 +51,7 @@ public class PropertyServiceImpl implements PropertyService {
 //            errorModel.setMessage("User does not exist");
 //            errorModelList.add(errorModel);
 
-            throw new BusinesssClassException("not found");
+            throw new BusinesssClassException("Not found");
         }
         return propertyDTO;
     }
@@ -102,7 +102,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PropertyDTO updatePropertyDescription(PropertyDTO propertyDTO, Long propertyId) {
+    public PropertyDTO updatePropertyDescription(PropertyDTO propertyDTO, Long propertyId) throws BusinesssClassException {
         Optional<PropertyEntity> optEn =  propertyRepository.findById(propertyId);
         PropertyDTO dto = null;
         if(optEn.isPresent()){
@@ -110,6 +110,15 @@ public class PropertyServiceImpl implements PropertyService {
             pe.setDescription(propertyDTO.getDescription());
             dto = propertyConverter.convertEntityToDTO(pe);
             propertyRepository.save(pe);
+        }
+        else{
+//            List<ErrorModel> errorModelList = new ArrayList<>();
+//            ErrorModel errorModel = new ErrorModel();
+//            errorModel.setCode("USER_ID_NOT_EXIST");
+//            errorModel.setMessage("User does not exist");
+//            errorModelList.add(errorModel);
+
+            throw new BusinesssClassException("not found");
         }
         return dto;
     }
